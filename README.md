@@ -51,22 +51,7 @@ This Bioinformatics Web App provides tools for performing pairwise sequence alig
    pip install -r requirements.txt
    ```
 
-4. **Install Clustal Omega**:
-
-   - **Ubuntu**:
-     ```sh
-     sudo apt-get update
-     sudo apt-get install clustalo
-     ```
-   - **macOS**:
-     ```sh
-     brew install clustal-omega
-     ```
-   - **Windows**:
-     - Download the Clustal Omega executable from [Clustal Omega download page](http://www.clustal.org/omega/).
-     - Extract the executable to a directory and add the directory to your system's PATH.
-
-5. **Set up the database**:
+4. **Set up the database**:
 
    ```sh
    flask db init
@@ -74,7 +59,7 @@ This Bioinformatics Web App provides tools for performing pairwise sequence alig
    flask db upgrade
    ```
 
-6. **Run the application**:
+5. **Run the application**:
    ```sh
    python main.py
    ```
@@ -89,10 +74,6 @@ This Bioinformatics Web App provides tools for performing pairwise sequence alig
 
 3. **Use the tools**:
    - Navigate to the Pairwise Alignment, Multiple Sequence Alignment, or Phylogenetic Tree pages to use the respective tools.
-
-## Contributing
-
-Contributions are welcome! Please fork the repository and submit a pull request with your changes.
 
 ## License
 
