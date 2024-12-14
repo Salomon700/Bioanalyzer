@@ -1,0 +1,30 @@
+{% extends "base.html" %} {% block content %}
+<div class="container mt-5">
+  <h1 class="text-center">Phylogenetic Tree</h1>
+  <form id="treeForm" class="mt-4">
+    <div class="mb-3">
+      <label for="tree-sequences" class="form-label"
+        >Sequences (Newick Format)</label
+      >
+      <textarea
+        id="tree-sequences"
+        class="form-control"
+        rows="5"
+        placeholder="Enter Newick formatted sequences"
+      ></textarea>
+    </div>
+    <button
+      type="button"
+      class="btn btn-primary"
+      onclick="generatePhylogeneticTree()"
+    >
+      Generate Tree
+    </button>
+  </form>
+  <div class="mt-4">
+    <h2>Generated Tree:</h2>
+    <pre id="tree-results" class="p-3 bg-light border rounded"></pre>
+  </div>
+</div>
+<script src="{{ url_for('static', filename='scripts.js') }}"></script>
+{% endblock %}
