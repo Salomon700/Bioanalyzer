@@ -50,3 +50,7 @@ def phylogenetic_tree():
         tree_ascii = perform_phylogenetic_analysis(newick_data)
         return jsonify({'phylogenetic_tree': tree_ascii})
     return render_template('phylogenetic_tree.html')
+
+@app.route('/health', methods=['GET'])
+def health_check():
+    return jsonify({"status": "UP"}), 200
