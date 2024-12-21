@@ -51,6 +51,6 @@ def phylogenetic_tree():
         return jsonify({'phylogenetic_tree': tree_ascii})
     return render_template('phylogenetic_tree.html')
 
-@app.route('/health', methods=['GET'])
+@routes.route('/health', methods=['GET'])
 def health_check():
     return jsonify({"status": "UP"}), 200
