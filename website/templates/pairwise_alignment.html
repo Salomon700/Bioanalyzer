@@ -1,14 +1,15 @@
-{% extends "base.html" %} {% block content %}
+{% extends "base.html" %} {% block title %} Pairwise Alignment {% endblock %} {%
+block content %}
 <div class="container mt-5">
-  <h1 class="text-center">Pairwise Alignment</h1>
-  <form id="alignmentForm" class="mt-4">
+  <h1 class="text-center">Pairwise Sequence Alignment</h1>
+  <form id="pairwiseForm" class="mt-4">
     <div class="mb-3">
       <label for="sequence1" class="form-label">Sequence 1</label>
       <textarea
         id="sequence1"
         class="form-control"
         rows="3"
-        placeholder="Enter Sequence 1"
+        placeholder="Enter first sequence"
       ></textarea>
     </div>
     <div class="mb-3">
@@ -17,12 +18,12 @@
         id="sequence2"
         class="form-control"
         rows="3"
-        placeholder="Enter Sequence 2"
+        placeholder="Enter second sequence"
       ></textarea>
     </div>
     <div class="mb-3">
       <label for="alignmentMode" class="form-label">Alignment Mode</label>
-      <select id="alignmentMode" class="form-control">
+      <select id="alignmentMode" class="form-select">
         <option value="global">Global</option>
         <option value="local">Local</option>
       </select>

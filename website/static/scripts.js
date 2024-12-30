@@ -1,4 +1,4 @@
-//pairwise
+// Pairwise alignment
 async function performPairwiseAlignment() {
   const seq1 = document.getElementById("sequence1").value;
   const seq2 = document.getElementById("sequence2").value;

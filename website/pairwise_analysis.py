@@ -51,8 +51,8 @@ def perform_pairwise_alignment(seq1, seq2, mode='global'):
         aligner.mode = mode  # Set alignment mode based on user input
 
         # Convert sequences to Seq objects
-        seq1 = Seq(seq1)
-        seq2 = Seq(seq2)
+        seq1 = Seq.Seq(seq1)
+        seq2 = Seq.Seq(seq2)
 
         alignments = aligner.align(seq1, seq2)
         

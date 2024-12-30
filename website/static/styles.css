@@ -134,3 +134,9 @@ footer a {
 footer a:hover {
   color: #007bff; /* Blue text color on hover for footer links */
 }
+
+/* Results Section Styles */
+#results {
+  color: #333; /* Dark text color for results */
+  background-color: #f8f9fa; /* Light background color for results */
+}
