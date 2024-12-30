@@ -3,6 +3,7 @@ body {
   background-color: #105c9f; /* Changed from white to blue */
   color: white; /* Default text color */
   font-family: Arial, sans-serif;
+  font-size: 18px; /* Increased font size for better readability */
   margin: 0;
   padding: 0;
 }
@@ -16,10 +17,12 @@ body {
 
 .navbar .navbar-brand {
   color: #ffffff !important; /* White text for brand */
+  font-size: 24px; /* Increased font size for brand */
 }
 
 .navbar .nav-link {
   color: #ffffff !important; /* White text */
+  font-size: 18px; /* Increased font size for nav links */
   transition: background-color 0.3s ease-in-out, color 0.3s ease-in-out;
 }
 
