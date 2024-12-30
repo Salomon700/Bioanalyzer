@@ -39,13 +39,6 @@
         <ul class="navbar-nav mr-auto">
           <li class="nav-item">
             <a
-              class="nav-link {% if request.endpoint == 'routes.home' %}active{% endif %}"
-              href="/"
-              >Home</a
-            >
-          </li>
-          <li class="nav-item">
-            <a
               class="nav-link {% if request.endpoint == 'routes.pairwise_alignment' %}active{% endif %}"
               href="/pairwise-alignment"
               >Pairwise Alignment</a
@@ -184,7 +177,6 @@
       <!-- Copyright -->
       <div class="text-center p-3 bg-primary text-light">
         © 2024 Bioinformatics WebApp. All rights reserved.
-      </div>
     </footer>
     {% endif %}
 
@@ -207,9 +199,7 @@
     <script>
       document.addEventListener("DOMContentLoaded", function () {
         const navbarToggler = document.querySelector(".navbar-toggler");
-        const navbarTogglerIcon = document.querySelector(
-          ".navbar-toggler-icon"
-        );
+        const navbarTogglerIcon = document.querySelector(".navbar-toggler-icon");
 
         navbarToggler.addEventListener("click", function () {
           if (navbarTogglerIcon.classList.contains("navbar-toggler-icon")) {

@@ -10,6 +10,12 @@ body {
 /* Navbar Styles */
 .navbar {
   background-color: #ffb508 !important; /* Gold color */
+  z-index: 1000; /* Ensure navbar is on top */
+  position: relative;
+}
+
+.navbar .navbar-brand {
+  color: #ffffff !important; /* White text for brand */
 }
 
 .navbar .nav-link {
@@ -75,27 +81,6 @@ body {
   margin-top: 1rem;
   padding: 0.75rem 1.5rem;
   font-size: 1rem;
-}
-
-/* Pills Navigation Styles */
-.nav-pills .nav-link {
-  color: white !important; /* White text */
-  transition: background-color 0.3s ease-in-out, color 0.3s ease-in-out;
-}
-
-.nav-pills .nav-link:hover {
-  background-color: #ffa200; /* Brown color on hover */
-  color: white !important; /* White text on hover */
-  border-radius: 50px; /* More pill-like */
-  padding: 0.2rem 0.3rem;
-  transform: none; /* Padding for pill effect */
-}
-
-.nav-pills .nav-link.active {
-  background-color: #ffa200; /* Brown color for active link */
-  color: white !important; /* White text for active link */
-  border-radius: 50px; /* More pill-like */
-  padding: 0.2rem 0.3rem; /* Padding for pill effect */
 }
 
 /* About Container Styles */
