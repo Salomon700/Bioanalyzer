@@ -27,13 +27,6 @@
         <option value="local">Local</option>
       </select>
     </div>
-    <div class="mb-3">
-      <label for="sequenceType" class="form-label">Sequence Type</label>
-      <select id="sequenceType" class="form-control">
-        <option value="nucleotide">Nucleotide</option>
-        <option value="protein">Protein</option>
-      </select>
-    </div>
     <button
       type="button"
       class="btn btn-primary"
@@ -44,7 +37,7 @@
   </form>
   <div class="mt-4">
     <h2>Results:</h2>
-    <pre id="results" class="p-3 bg-light border rounded"></pre>
+    <div id="results" class="p-3 bg-light border rounded"></div>
   </div>
 </div>
 <script src="{{ url_for('static', filename='scripts.js') }}"></script>

@@ -1,28 +1,6 @@
 {% extends "base.html" %} {% block content %}
 <div class="container mt-5">
   <h1 class="text-center">Multiple Sequence Alignment</h1>
-  <form id="msaForm" class="mt-4" method="POST">
-    <div class="mb-3">
-      <label for="sequences" class="form-label">Sequences</label>
-      <textarea
-        id="sequences"
-        class="form-control"
-        rows="5"
-        placeholder="Enter sequences separated by new lines"
-      ></textarea>
-    </div>
-    <button
-      type="button"
-      class="btn btn-primary"
-      onclick="performMultipleAlignment()"
-    >
-      Align
-    </button>
-  </form>
-  <div class="mt-4">
-    <h2>Results:</h2>
-    <pre id="msa-results" class="p-3 bg-light border rounded"></pre>
-  </div>
+  <p class="text-center mt-4">Coming soon</p>
 </div>
-<script src="{{ url_for('static', filename='scripts.js') }}"></script>
 {% endblock %}

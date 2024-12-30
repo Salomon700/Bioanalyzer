@@ -1,8 +1,8 @@
+//pairwise
 async function performPairwiseAlignment() {
   const seq1 = document.getElementById("sequence1").value;
   const seq2 = document.getElementById("sequence2").value;
   const alignmentMode = document.getElementById("alignmentMode").value;
-  const sequenceType = document.getElementById("sequenceType").value;
 
   try {
     const response = await fetch("/pairwise-alignment", {
@@ -14,74 +14,115 @@ async function performPairwiseAlignment() {
         seq1: seq1,
         seq2: seq2,
         mode: alignmentMode,
-        type: sequenceType,
       }),
     });
 
     if (!response.ok) {
       const errorData = await response.json();
-      document.getElementById("results").textContent = errorData.error;
+      document.getElementById("results").innerHTML = errorData.error;
       return;
     }
 
     const result = await response.json();
-    document.getElementById("results").textContent = result.join("\n\n");
+    document.getElementById("results").innerHTML = `
+      <p><strong>Score:</strong> ${result.score}</p>
+      <p><strong>Percent Identity:</strong> ${result.percent_identity}%</p>
+      <p><strong>Alignment:</strong></p>
+      <pre>${result.alignment}</pre>
+    `;
   } catch (error) {
-    document.getElementById("results").textContent = `Error: ${error.message}`;
+    document.getElementById("results").innerHTML = `Error: ${error.message}`;
   }
 }
 
-// Perform Multiple Sequence Alignment
-async function performMultipleAlignment() {
-  const sequences = document.getElementById("sequences").value;
+//sequence alignment ncbi
+async function fetchSimilarSequences() {
+  const query = document.getElementById("sequenceQuery").value;
+  const resultsDiv = document.getElementById("similar-sequences-results");
+  const spinner = document.getElementById("loading-spinner");
+  const downloadButton = document.getElementById("download-button");
 
-  // Clear previous results
-  document.getElementById("msa-results").textContent = "Loading...";
+  // Show the loading spinner
+  spinner.classList.remove("d-none");
+  resultsDiv.innerHTML = "";
+  downloadButton.classList.add("d-none");
 
   try {
-    const response = await fetch("/multiple-alignment", {
+    const response = await fetch("/fetch-similar-sequences", {
       method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ sequences }),
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ query }),
     });
+
+    // Hide the loading spinner
+    spinner.classList.add("d-none");
 
     if (!response.ok) {
       const errorData = await response.json();
-      document.getElementById("msa-results").textContent = errorData.error;
+      resultsDiv.innerHTML = errorData.error;
       return;
     }
 
-    const data = await response.json();
-    const resultsDiv = document.getElementById("msa-results");
-    if (data.alignment) {
-      resultsDiv.innerText = data.alignment;
-    } else {
-      resultsDiv.innerText =
-        "Error: Unable to perform alignment. Please check your input.";
-    }
+    const results = await response.json();
+    resultsDiv.innerHTML = "";
+
+    let sequencesText = "";
+
+    results.forEach((result, index) => {
+      const resultHtml = `
+        <div class="result-item">
+          <h5>Result ${index + 1}</h5>
+          <p><strong>Title:</strong> ${result.title}</p>
+          <p><strong>Accession:</strong> ${result.accession}</p>
+          <p><strong>E-value:</strong> ${result.e_value}</p>
+          <p><strong>Percent Similarity:</strong> ${result.percent_similarity.toFixed(
+            2
+          )}%</p>
+          <pre>${result.sequence}</pre>
+        </div>
+        <hr>
+      `;
+      resultsDiv.innerHTML += resultHtml;
+
+      sequencesText += `>Result ${index + 1}\n`;
+      sequencesText += `Title: ${result.title}\n`;
+      sequencesText += `Accession: ${result.accession}\n`;
+      sequencesText += `E-value: ${result.e_value}\n`;
+      sequencesText += `Percent Similarity: ${result.percent_similarity.toFixed(
+        2
+      )}%\n`;
+      sequencesText += `${result.sequence}\n\n`;
+    });
+
+    // Show the download button
+    downloadButton.classList.remove("d-none");
+
+    // Store the sequences text in the button's dataset
+    downloadButton.dataset.sequences = sequencesText;
   } catch (error) {
-    document.getElementById(
-      "msa-results"
-    ).textContent = `Error: ${error.message}`;
+    // Hide the loading spinner in case of an error
+    spinner.classList.add("d-none");
+    resultsDiv.innerHTML = `Error: ${error.message}`;
   }
 }
+
+function downloadSequences() {
+  const downloadButton = document.getElementById("download-button");
+  const sequencesText = downloadButton.dataset.sequences;
+
+  const blob = new Blob([sequencesText], { type: "text/plain" });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement("a");
+  a.href = url;
+  a.download = "sequences.txt";
+  document.body.appendChild(a);
+  a.click();
+  document.body.removeChild(a);
+  URL.revokeObjectURL(url);
+}
+
+// Perform Multiple Sequence Alignment
 
 // Generate Phylogenetic Tree
-async function perform_phylogenetic_analysis() {
-  const sequences = document.getElementById("tree-sequences").value;
-
-  const response = await fetch("/phylogenetic-tree", {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({ newick: sequences }),
-  });
-
-  const data = await response.json();
-  const resultsDiv = document.getElementById("tree-results");
-  if (data.phylogenetic_tree) {
-    resultsDiv.innerText = data.phylogenetic_tree;
-  } else {
-    resultsDiv.innerText =
-      "Error: Unable to generate tree. Please check your input.";
-  }
-}

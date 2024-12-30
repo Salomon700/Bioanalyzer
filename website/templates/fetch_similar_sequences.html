@@ -1,0 +1,45 @@
+{% extends "base.html" %} {% block content %}
+<div class="container mt-5">
+  <h1 class="text-center">Fetch Similar Sequences</h1>
+  <form id="fetchForm" class="mt-4">
+    <div class="mb-3">
+      <label for="sequenceQuery" class="form-label">Sequence Query</label>
+      <textarea
+        id="sequenceQuery"
+        class="form-control"
+        rows="3"
+        placeholder="Enter Sequence Query"
+      ></textarea>
+    </div>
+    <button
+      type="button"
+      class="btn btn-primary"
+      onclick="fetchSimilarSequences()"
+    >
+      Fetch
+    </button>
+  </form>
+  <div class="mt-4">
+    <h2>Similar Sequences:</h2>
+    <div
+      id="loading-spinner"
+      class="spinner-border text-primary d-none"
+      role="status"
+    >
+      <span class="sr-only">Loading...</span>
+    </div>
+    <div
+      id="similar-sequences-results"
+      class="p-3 bg-light border rounded"
+    ></div>
+    <button
+      id="download-button"
+      class="btn btn-secondary mt-3 d-none"
+      onclick="downloadSequences()"
+    >
+      Download Sequences
+    </button>
+  </div>
+</div>
+<script src="{{ url_for('static', filename='scripts.js') }}"></script>
+{% endblock %}

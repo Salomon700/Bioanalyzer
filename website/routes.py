@@ -1,8 +1,6 @@
-from flask import Blueprint, render_template, request, jsonify
+from flask import Blueprint, render_template, request, jsonify, flash, redirect
 from flask_login import login_required, current_user
-from .pairwise_analysis import perform_pairwise_alignment
-from .multiple_alignment import perform_multiple_alignment
-from .phylogenetic_analysis import perform_phylogenetic_analysis
+from .pairwise_analysis import perform_pairwise_alignment, fetch_top_similar_sequences
 
 routes = Blueprint('routes', __name__)
 
@@ -18,30 +16,38 @@ def pairwise_alignment():
         seq1 = data.get('seq1')
         seq2 = data.get('seq2')
         mode = data.get('mode', 'global')
-        seq_type = data.get('type', 'nucleotide')
-        results = perform_pairwise_alignment(seq1, seq2, mode, seq_type)
-        if "Error" in results[0]:
-            return jsonify({"error": results[0]}), 500
-        return jsonify(results)
+        results = perform_pairwise_alignment(seq1, seq2, mode)
+        if "error" in results[0]:
+            return jsonify(results[0]), 500
+        return jsonify(results[0])
     return render_template('pairwise_alignment.html')
+
+@routes.route('/fetch-similar-sequences', methods=['GET', 'POST'])
+@login_required
+def fetch_similar_sequences():
+    if request.method == 'POST':
+        data = request.get_json()
+        query = data.get('query')
+        results = fetch_top_similar_sequences(query)
+        if "error" in results:
+            return jsonify(results), 500
+        return jsonify(results)
+    return render_template('fetch_similar_sequences.html')
 
 @routes.route('/multiple-alignment', methods=['GET', 'POST'])
 @login_required
 def multiple_alignment():
-    if request.method == 'POST':
-        return jsonify({'alignment': "Multiple alignment feature coming soon!"})
     return render_template('multiple_alignment.html')
 
 @routes.route('/phylogenetic-tree', methods=['GET', 'POST'])
 @login_required
 def phylogenetic_tree():
-    if request.method == 'POST':
-        data = request.get_json()
-        fasta_sequences = data.get('fasta_sequences')
-        phylogenetic_tree_result = perform_phylogenetic_analysis(fasta_sequences)
-        return jsonify({'phylogenetic_tree': phylogenetic_tree_result})
     return render_template('phylogenetic_tree.html')
 
-@routes.route('/health', methods=['GET'])
-def health_check():
-    return jsonify({"status": "UP"}), 200
+@routes.route('/about')
+def about():
+    return render_template('about.html')
+
+@routes.route('/contact')
+def contact():
+    return render_template('contact.html')
