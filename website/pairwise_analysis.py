@@ -1,9 +1,21 @@
 from Bio.Align import PairwiseAligner
+from Bio.Seq import Seq
+from Bio.SeqRecord import SeqRecord
+from Bio.Align import MultipleSeqAlignment
 
-def perform_pairwise_alignment(seq1, seq2):
+def perform_pairwise_alignment(seq1, seq2, mode='global', seq_type='nucleotide'):
     try:
         aligner = PairwiseAligner()
-        aligner.mode = 'global'  # Choose 'global' or 'local' alignment mode
+        aligner.mode = mode  # Set alignment mode based on user input
+
+        # Convert sequences to Seq objects based on sequence type
+        if seq_type == 'protein':
+            seq1 = Seq(seq1)
+            seq2 = Seq(seq2)
+        else:
+            seq1 = Seq(seq1)
+            seq2 = Seq(seq2)
+
         alignments = aligner.align(seq1, seq2)
         
         # Get the best alignment

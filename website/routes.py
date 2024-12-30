@@ -17,7 +17,9 @@ def pairwise_alignment():
         data = request.get_json()
         seq1 = data.get('seq1')
         seq2 = data.get('seq2')
-        results = perform_pairwise_alignment(seq1, seq2)
+        mode = data.get('mode', 'global')
+        seq_type = data.get('type', 'nucleotide')
+        results = perform_pairwise_alignment(seq1, seq2, mode, seq_type)
         if "Error" in results[0]:
             return jsonify({"error": results[0]}), 500
         return jsonify(results)
@@ -27,18 +29,7 @@ def pairwise_alignment():
 @login_required
 def multiple_alignment():
     if request.method == 'POST':
-        data = request.get_json()
-        sequences = data.get('sequences')
-        input_file = 'input.fasta'
-        output_file = 'output.aln'
-
-        with open(input_file, 'w') as f:
-            f.write(sequences)
-
-        alignment_result = perform_multiple_alignment(input_file, output_file)
-        if "Error" in alignment_result:
-            return jsonify({"error": alignment_result}), 500
-        return jsonify({'alignment': alignment_result})
+        return jsonify({'alignment': "Multiple alignment feature coming soon!"})
     return render_template('multiple_alignment.html')
 
 @routes.route('/phylogenetic-tree', methods=['GET', 'POST'])
@@ -46,9 +37,9 @@ def multiple_alignment():
 def phylogenetic_tree():
     if request.method == 'POST':
         data = request.get_json()
-        newick_data = data.get('newick')
-        tree_ascii = perform_phylogenetic_analysis(newick_data)
-        return jsonify({'phylogenetic_tree': tree_ascii})
+        fasta_sequences = data.get('fasta_sequences')
+        phylogenetic_tree_result = perform_phylogenetic_analysis(fasta_sequences)
+        return jsonify({'phylogenetic_tree': phylogenetic_tree_result})
     return render_template('phylogenetic_tree.html')
 
 @routes.route('/health', methods=['GET'])

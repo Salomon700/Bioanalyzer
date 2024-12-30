@@ -1,7 +1,8 @@
-// Perform Pairwise Alignment
 async function performPairwiseAlignment() {
   const seq1 = document.getElementById("sequence1").value;
   const seq2 = document.getElementById("sequence2").value;
+  const alignmentMode = document.getElementById("alignmentMode").value;
+  const sequenceType = document.getElementById("sequenceType").value;
 
   try {
     const response = await fetch("/pairwise-alignment", {
@@ -9,7 +10,12 @@ async function performPairwiseAlignment() {
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({ seq1, seq2 }),
+      body: JSON.stringify({
+        seq1: seq1,
+        seq2: seq2,
+        mode: alignmentMode,
+        type: sequenceType,
+      }),
     });
 
     if (!response.ok) {
@@ -61,7 +67,7 @@ async function performMultipleAlignment() {
 }
 
 // Generate Phylogenetic Tree
-async function generatePhylogeneticTree() {
+async function perform_phylogenetic_analysis() {
   const sequences = document.getElementById("tree-sequences").value;
 
   const response = await fetch("/phylogenetic-tree", {

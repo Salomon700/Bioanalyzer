@@ -3,20 +3,18 @@
   <h1 class="text-center">Phylogenetic Tree</h1>
   <form id="treeForm" class="mt-4">
     <div class="mb-3">
-      <label for="tree-sequences" class="form-label"
-        >Sequences (Newick Format)</label
-      >
+      <label for="fasta-sequences" class="form-label">FASTA Sequences</label>
       <textarea
-        id="tree-sequences"
+        id="fasta-sequences"
         class="form-control"
         rows="5"
-        placeholder="Enter Newick formatted sequences"
+        placeholder="Enter FASTA formatted sequences"
       ></textarea>
     </div>
     <button
       type="button"
       class="btn btn-primary"
-      onclick="generatePhylogeneticTree()"
+      onclick="perform_phylogenetic_analysis()"
     >
       Generate Tree
     </button>
