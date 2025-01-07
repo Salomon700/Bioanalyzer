@@ -81,6 +81,7 @@ This project is licensed under the MIT License. See the LICENSE file for details
 
 ## Acknowledgements
 
-- [Clustal Omega](http://www.clustal.org/omega/)
 - [Flask](https://flask.palletsprojects.com/)
 - [Bootstrap](https://getbootstrap.com/)
+- [Biopython](https://biopython.org/)
+- [Tech with Tim](https://github.com/techwithtim/Flask-Web-App-Tutorial)
