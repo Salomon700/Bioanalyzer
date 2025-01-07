@@ -25,9 +25,10 @@ This Bioinformatics Web App provides tools for performing pairwise sequence alig
 
 - Python 3.x
 - Flask
-- SQLAlchemy
 - Flask-Login
-- Clustal Omega
+- Flask-Migrate
+- Flask-SQLAlchemy
+- biopython
 
 ### Steps
 
