@@ -126,5 +126,26 @@ footer a:hover {
 /* Results Section Styles */
 #results {
   color: #333; /* Dark text color for results */
-  background-color: #f8f9fa; /* Light background color for results */
+  background-color: #ffffff; /* Light background color for results */
+}
+
+#fetchForm {
+  margin-top: 2rem;
+}
+
+#sequenceQuery,
+#database {
+  margin-bottom: 1rem;
+}
+
+#similar-sequences-results {
+  padding: 1rem;
+  background-color: #ffffff;
+  color: black;
+  border: 1px solid #ddd;
+  border-radius: 0.5rem;
+}
+
+#download-button {
+  margin-top: 1rem;
 }
