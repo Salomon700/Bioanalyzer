@@ -19,23 +19,45 @@ async function performPairwiseAlignment() {
 
     if (!response.ok) {
       const errorData = await response.json();
-      document.getElementById("results").innerHTML = errorData.error;
+      console.error("Error:", errorData.error);
+      document.getElementById(
+        "results"
+      ).innerText = `Error: ${errorData.error}`;
       return;
     }
 
     const result = await response.json();
+    console.log("Alignment Result:", result);
     document.getElementById("results").innerHTML = `
       <p><strong>Score:</strong> ${result.score}</p>
-      <p><strong>Percent Identity:</strong> ${result.percent_identity}%</p>
-      <p><strong>Alignment:</strong></p>
+      <p><strong>Percent Identity:</strong> ${result.percent_identity.toFixed(
+        2
+      )}%</p>
       <pre>${result.alignment}</pre>
     `;
   } catch (error) {
-    document.getElementById("results").innerHTML = `Error: ${error.message}`;
+    console.error("Error:", error);
+    document.getElementById("results").innerText = `Error: ${error.message}`;
   }
 }
 
-//sequence alignment ncbi
+// Function to download sequences
+function downloadSequences() {
+  const downloadButton = document.getElementById("download-button");
+  const sequencesText = downloadButton.dataset.sequences;
+
+  const blob = new Blob([sequencesText], { type: "text/plain" });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement("a");
+  a.href = url;
+  a.download = "sequences.txt";
+  document.body.appendChild(a);
+  a.click();
+  document.body.removeChild(a);
+  URL.revokeObjectURL(url);
+}
+
+// Sequence alignment NCBI
 async function fetchSimilarSequences() {
   const query = document.getElementById("sequenceQuery").value;
   const database = document.getElementById("database").value;
