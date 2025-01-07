@@ -28,7 +28,8 @@ def fetch_similar_sequences():
     if request.method == 'POST':
         data = request.get_json()
         query = data.get('query')
-        results = fetch_top_similar_sequences(query)
+        database = data.get('database', 'nt')
+        results = fetch_top_similar_sequences(query, db=database)
         if "error" in results:
             return jsonify(results), 500
         return jsonify(results)

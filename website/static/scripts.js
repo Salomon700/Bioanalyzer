@@ -38,6 +38,7 @@ async function performPairwiseAlignment() {
 //sequence alignment ncbi
 async function fetchSimilarSequences() {
   const query = document.getElementById("sequenceQuery").value;
+  const database = document.getElementById("database").value;
   const resultsDiv = document.getElementById("similar-sequences-results");
   const spinner = document.getElementById("loading-spinner");
   const downloadButton = document.getElementById("download-button");
@@ -53,7 +54,7 @@ async function fetchSimilarSequences() {
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({ query }),
+      body: JSON.stringify({ query, database }),
     });
 
     // Hide the loading spinner
@@ -107,22 +108,3 @@ async function fetchSimilarSequences() {
     resultsDiv.innerHTML = `Error: ${error.message}`;
   }
 }
-
-function downloadSequences() {
-  const downloadButton = document.getElementById("download-button");
-  const sequencesText = downloadButton.dataset.sequences;
-
-  const blob = new Blob([sequencesText], { type: "text/plain" });
-  const url = URL.createObjectURL(blob);
-  const a = document.createElement("a");
-  a.href = url;
-  a.download = "sequences.txt";
-  document.body.appendChild(a);
-  a.click();
-  document.body.removeChild(a);
-  URL.revokeObjectURL(url);
-}
-
-// Perform Multiple Sequence Alignment
-
-// Generate Phylogenetic Tree

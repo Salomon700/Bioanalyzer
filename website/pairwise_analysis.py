@@ -7,7 +7,7 @@ Entrez.email = "ntwalisolomon9@gmail.com"
 def fetch_top_similar_sequences(query, db="nt", retmax=10):
     try:
         # Perform BLAST search
-        result_handle = NCBIWWW.qblast("blastn", db, query)
+        result_handle = NCBIWWW.qblast("blastn" if db == "nt" else "blastp", db, query)
         
         # Parse BLAST results
         blast_records = NCBIXML.read(result_handle)
@@ -17,16 +17,12 @@ def fetch_top_similar_sequences(query, db="nt", retmax=10):
             for hsp in alignment.hsps:
                 sequence_data = {
                     "title": alignment.title,
-                    "sequence": hsp.sbjct,
                     "accession": alignment.accession,
                     "e_value": hsp.expect,
-                    "percent_similarity": (hsp.identities / hsp.align_length) * 100
+                    "percent_similarity": (hsp.identities / hsp.align_length) * 100,
+                    "sequence": hsp.sbjct,
                 }
                 sequences.append(sequence_data)
-        
-        # Sort sequences by percent similarity in descending order
-        sequences.sort(key=lambda x: x['percent_similarity'], reverse=True)
-        
         return sequences
     except Exception as e:
         return {"error": str(e)}
