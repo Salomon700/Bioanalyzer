@@ -2,7 +2,7 @@ from Bio import Entrez, SeqIO, Seq
 from Bio.Align import PairwiseAligner
 from Bio.Blast import NCBIWWW, NCBIXML
 
-Entrez.email = "ntwalisolomon9@gmail.com"  # Replace with your email
+Entrez.email = "ntwalisolomon9@gmail.com"
 
 def fetch_top_similar_sequences(query, db="nt", retmax=10):
     try:

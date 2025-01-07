@@ -19,11 +19,25 @@
   <div class="row mb-4">
     <div class="col-md-6">
       <div class="tool-box">
-        <h5>Pairwise Sequence Alignment</h5>
+        <h5><b>Pairwise Sequence Alignment</b></h5>
         <p>
           Align two sequences to identify regions of similarity. This tool helps
-          in comparing two sequences to find the best alignment.
+          in comparing two sequences to find the best alignment.<br>
+          <b>Global alignment</b>: This method compares two sequences by aligning
+          the entire length of the sequences maximizing overall similarity.<br>
+          This is useful when comparing sequences that are of the same length.<br>  
+          <b>Local alignment</b>: Instead of alinging the entire length, only regions
+          of high density of matches are aligned.<br>
+          This is useful for identifying short conserved regions in protein/nucleotide 
+          sequences.
+          <b>Applications</b>
         </p>
+        <ul>
+            <li>Identifying conserved regions in protein/nucleotide sequences</li>
+            <li>Identify homologous sequences</li>
+            <li>Pin point mutations in sequences</li>
+            <li>Identify suitable PCR primers</li>
+        </ul>
       </div>
     </div>
     <div class="col-md-6">
@@ -37,41 +51,39 @@
   <div class="row mb-4">
     <div class="col-md-6 order-md-2">
       <div class="tool-box">
-        <h5>Multiple Sequence Alignment</h5>
+        <h5>NCBI Search</h5>
         <p>
-          Align multiple sequences to identify conserved regions. This tool is
-          useful for finding similarities across multiple sequences.
+          Search the National Center for Biotechnology Information (NCBI) databases
+          for a wide range of biological data. This tool allows users to access
+          various databases including nucleotide sequences, protein sequences,
+          and more.
+          <b>Features</b>:
+          <ul>
+            <li>Search for nucleotide sequences</li>
+            <li>Search for protein sequences</li>
+            <li>Access to genomic data</li>
+            <li>Retrieve scientific literature</li>
+            <li>Find information on genes and their functions</li>
+          </ul>
+          <b>Applications</b>:
+          <ul>
+            <li>Researching gene functions and structures</li>
+            <li>Identifying protein sequences and structures</li>
+            <li>Accessing scientific publications</li>
+            <li>Exploring genomic data for various organisms</li>
+            <li>Finding information on genetic variations</li>
+          </ul>
         </p>
       </div>
     </div>
     <div class="col-md-6 order-md-1">
       <img
-        src="../static/images/multiple_sequence_image.jpeg"
+        src="../static/images/ncbi.png"
         class="img-fluid rounded"
         alt="Multiple Sequence Alignment"
       />
     </div>
   </div>
-  <div class="row mb-4">
-    <div class="col-md-6">
-      <div class="tool-box">
-        <h5>Phylogenetic Tree Construction</h5>
-        <p>
-          Generate phylogenetic trees from sequence data. This tool helps in
-          understanding the evolutionary relationships between sequences.
-        </p>
-      </div>
-    </div>
-    <div class="col-md-6">
-      <img
-        src="../static/images/phylogenetic_tree_image.jpeg"
-        class="img-fluid rounded"
-        alt="Phylogenetic Tree Construction"
-      />
-    </div>
-  </div>
-</div>
-
 <script>
   // Add smooth scrolling for the "Explore Tools" button
   document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
