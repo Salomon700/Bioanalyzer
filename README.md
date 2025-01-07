@@ -76,10 +76,6 @@ This Bioinformatics Web App provides tools for performing pairwise sequence alig
 3. **Use the tools**:
    - Navigate to the Pairwise Alignment, Multiple Sequence Alignment, or Phylogenetic Tree pages to use the respective tools.
 
-## License
-
-This project is licensed under the MIT License. See the LICENSE file for details.
-
 ## Acknowledgements
 
 - [Flask](https://flask.palletsprojects.com/)
