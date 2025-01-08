@@ -1,13 +1,13 @@
 from Bio import Entrez, SeqIO, Seq
 from Bio.Align import PairwiseAligner
-from Bio.Blast import NCBIWWW, NCBIXML
+from Bio import Entrez, NCBIWWW, NCBIXML
 
 Entrez.email = "ntwalisolomon9@gmail.com"
 
 def fetch_top_similar_sequences(query, db="nt", retmax=10):
     try:
-        # Perform BLAST search
-        result_handle = NCBIWWW.qblast("blastn" if db == "nt" else "blastp", db, query)
+        # Perform BLAST search with a limit on the number of results
+        result_handle = NCBIWWW.qblast("blastn" if db == "nt" else "blastp", db, query, hitlist_size=retmax)
         
         # Parse BLAST results
         blast_records = NCBIXML.read(result_handle)
