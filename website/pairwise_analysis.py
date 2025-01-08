@@ -1,6 +1,6 @@
 from Bio import Entrez, SeqIO, Seq
 from Bio.Align import PairwiseAligner
-from Bio.Blast import NCBIWWW, NCBIXML
+from Bio import Entrez, NCBIWWW, NCBIXML
 
 Entrez.email = "ntwalisolomon9@gmail.com"
 

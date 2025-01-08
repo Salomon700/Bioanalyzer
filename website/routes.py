@@ -35,16 +35,6 @@ def fetch_similar_sequences():
         return jsonify(results)
     return render_template('fetch_similar_sequences.html')
 
-@routes.route('/multiple-alignment', methods=['GET', 'POST'])
-@login_required
-def multiple_alignment():
-    return render_template('multiple_alignment.html')
-
-@routes.route('/phylogenetic-tree', methods=['GET', 'POST'])
-@login_required
-def phylogenetic_tree():
-    return render_template('phylogenetic_tree.html')
-
 @routes.route('/about')
 def about():
     return render_template('about.html')
